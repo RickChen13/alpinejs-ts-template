@@ -10,15 +10,20 @@
 ├─public
 │
 └─src
-    ├─alpine                            存放AlpineJS文件
-    │
-    ├─canvas                            存放canvasJS文件夹
-    │
-    ├─common                            公共类
-    │
-    ├─controller                        存放入口文件
-    │
-    ├─scss                              存样式文件
-    │
-    └─template                          存放模板文件
+    ├─api                               网络请求
+    │  ├─base
+    │  ├─bll
+    │  ├─controller
+    │  └─interface
+    │      ├─base
+    │      └─controller
+    ├─app                               页面
+    │  ├─alpine                         存放alpine函数
+    │  ├─style                          存放样式
+    │  └─template                       存放html    
+    ├─common                            公用函数
+    ├─config                            配置
+    └─fast                              fast
+        └─axios
+            └─interface
 ~~~
