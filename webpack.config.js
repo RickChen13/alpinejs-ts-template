@@ -9,26 +9,27 @@ const router = require("./config/router.js");
 module.exports = (env, argv) => {
     const getEntry = () => {
         const entry = {};
-        if (router == []) {
-            glob.sync('./src/controller/*.ts').forEach((file) => {
+        if (router.length == 0) {
+            glob.sync('./src/app/*.ts').forEach((file) => {
                 const name = file.replace(/(.*\/)*([^.]+).*/ig, "$2");
                 entry[name] = file;
             });
+
         } else {
             for (let index = 0; index < router.length; index++) {
                 const element = router[index];
-                entry[element.entryName] = element.controller
+                entry[element.entryName] = element.app
             }
         }
-
+        console.log(entry)
         return entry;
     }
 
     const getHtmlwp = () => {
         const result = [];
-        if (router == []) {
+        if (router.length == 0) {
             // 自动路由
-            glob.sync('./src/controller/*.ts').forEach((file) => {
+            glob.sync('./src/app/*.ts').forEach((file) => {
                 const name = file.replace(/(.*\/)*([^.]+).*/ig, "$2");
                 result.push(new htmlwp({
                     entry: name,
@@ -61,9 +62,9 @@ module.exports = (env, argv) => {
                 }))
             }
         }
-
         return result;
     }
+
     const getPlugins = () => {
         const result = [];
         if (argv.mode == "production") {
@@ -76,7 +77,9 @@ module.exports = (env, argv) => {
         result.push(...getHtmlwp());
         return result;
     }
+
     return {
+        // devtool: 'source-map',
         mode: argv.mode,
         entry: getEntry(),
         output: {

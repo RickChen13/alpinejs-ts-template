@@ -87,6 +87,13 @@ class App {
     return this;
   }
 
+  /**
+   * 执行函数
+   *
+   * @param func
+   * @param args
+   * @returns
+   */
   run(func: Function, ...args: any) {
     func(...args);
     return this;
